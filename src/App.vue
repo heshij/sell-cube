@@ -1,16 +1,34 @@
 <template>
   <div id="app">
-    <cube-button>cube-button</cube-button>
+    <v-header :seller="seller"></v-header>
   </div>
 </template>
 
 <script>
+  import VHeader from './components/v-hearder/v-hearder'
+  import { getSeller } from './api'
 
-export default {
-  name: 'app',
-  components: {
+  export default {
+    name: 'app',
+    data () {
+      return {
+        seller: {}
+      }
+    },
+    created () {
+      this._getSeller()
+    },
+    methods: {
+      _getSeller () {
+        getSeller().then((seller) => {
+          this.seller = seller
+        })
+      }
+    },
+    components: {
+      VHeader
+    }
   }
-}
 </script>
 <style lang="stylus">
 
